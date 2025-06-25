@@ -102,4 +102,6 @@ const logout = (req, res) => {
     }
 }
 
-export { signup, login, logout };
+const updateProfile = async (req, res) => {}
+
+export { signup, login, logout, updateProfile };
