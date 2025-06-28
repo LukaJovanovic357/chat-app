@@ -102,7 +102,7 @@ const logout = (req, res) => {
     }
 }
 
-export const updateProfile = async (req, res) => {
+const updateProfile = async (req, res) => {
     try {
       const { profilePic } = req.body;
       const userId = req.user._id;
@@ -125,7 +125,7 @@ export const updateProfile = async (req, res) => {
     }
   };
 
-  export const checkAuth = (req, res) => {
+const checkAuth = (req, res) => {
     try {
       res.status(200).json(req.user);
     } catch (error) {
@@ -135,4 +135,4 @@ export const updateProfile = async (req, res) => {
   };
   
 
-export { signup, login, logout, updateProfile };
+export { signup, login, logout, updateProfile, checkAuth };
