@@ -1,5 +1,6 @@
 import {create} from "zustand"
 import {axiosInstance} from "../lib/axios"
+import toast from "react-hot-toast"
 
 export const useAuthStore = create(set => {
     return {
@@ -27,7 +28,14 @@ export const useAuthStore = create(set => {
               set({ authUser: res.data });
               toast.success("Account created successfully");
             } catch (error) {
-              toast.error(error.response.data.message);
+              console.error("Signup error:", error);
+              if (error.response && error.response.data) {
+                toast.error(error.response.data.message || "Signup failed");
+              } else if (error.code === 'ERR_NETWORK') {
+                toast.error("Cannot connect to server. Please check if the backend is running.");
+              } else {
+                toast.error("An unexpected error occurred");
+              }
             } finally {
               set({ isSigningUp: false });
             }
