@@ -1,8 +1,16 @@
 import Navbar from "./components/Navbar"
 import {Routes, Route} from "react-router-dom"
 import {HomePage, SignUpPage, LoginPage, SettingsPage, ProfilePage} from "./pages"
+import {useAuthStore} from "./store/useAuthStore.js"
+import {useEffect} from "react"
 
-function App() {
+ function App() {
+
+  const {authUser, checkAuth} = useAuthStore();
+
+  useEffect(() => {}, [checkAuth])
+
+  console.log({authUser});
 
   return (
     <>
