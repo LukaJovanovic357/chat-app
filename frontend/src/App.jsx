@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import {
   HomePage,
   SignUpPage,
@@ -13,6 +13,10 @@ import { Loader } from "lucide-react";
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
+  const location = useLocation();
+  
+  // Check if current route is an auth page
+  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
 
   useEffect(() => {
     checkAuth();
@@ -29,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      {!isAuthPage && <Navbar />}
       <Routes>
         <Route
           path="/"
